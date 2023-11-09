@@ -147,3 +147,64 @@ Plot.rectY(filtered,
   }
 )
 ```
+
+
+# Map test
+[see this example](https://observablehq.com/d/d540c039bae98334)
+
+```{ojs}
+gnis_data = {
+  //tba - graphql thing
+//https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/1452448 -- https://github.com/internetofwater/docs.geoconnex.us/wiki/WaDE-Template
+
+  //https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0
+} 
+```
+
+```{ojs}
+unified_school_district_data = {
+  const json = await fetch(`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/14/query?where=GEOID="4900870"&geometryType=esriGeometryPolygon&inSR=4326&outFields=*&returnGeometry=true&f=geojson`).then(d => d.json())
+
+  return json
+}
+```
+
+```{ojs}
+county_data = {
+  const json = await fetch(`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/82/query?where=GEOID="31039"&geometryType=esriGeometryPolygon&inSR=4326&outFields=*&returnGeometry=true&f=geojson`).then(d => d.json())
+
+  return json
+}
+```
+
+```{ojs}
+incorporated_place_data = {
+  const json = await fetch(`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/28/query?where=GEOID="0157576"&geometryType=esriGeometryPolygon&inSR=4326&outFields=*&returnGeometry=true&f=geojson`).then(d => d.json())
+
+  return json
+}
+```
+
+```{ojs}
+census_designated_place_data = {
+   const json = await fetch(`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/30/query?where=GEOID="0181084"&geometryType=esriGeometryPolygon&inSR=4326&outFields=*&returnGeometry=true&f=geojson`).then(d => d.json())
+
+  return json
+}
+```
+
+
+```{ojs}
+{
+const container = yield htl.html`<div style="height: 500px;">`;
+const map = L.map(container);
+const countyLayer = L.geoJSON(county_data).addTo(map);
+const incorporatedPlaceLayer = L.geoJSON(incorporated_place_data).addTo(map);
+const designatedPlaceLayer = L.geoJSON(census_designated_place_data).addTo(map)
+  
+map.fitBounds(incorporatedPlaceLayer.getBounds(), {maxZoom: 16});
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "© <a href=https://www.openstreetmap.org/copyright>OpenStreetMap</a> contributors"
+}).addTo(map);
+}
+```
