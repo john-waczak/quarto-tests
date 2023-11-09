@@ -1,0 +1,149 @@
+---
+title: "Learning Observable"
+subtitle: "JavaScript and Observable"
+date: today
+format:
+  html:
+    html-math-method: katex
+    echo: false
+---
+
+
+# Top-Level Variables
+
+
+
+Observable let's us both declare and assign variables, so no need for `let`, `var`, or `const`. These values are *immutable*.
+
+```{ojs}
+x = Math.random();
+x;
+```
+here's a string
+```{ojs}
+test_string = "Hello world!";
+test_string;
+```
+
+# Blocks and Functions
+
+We can organize code into logical chunks using *blocks* or *functions*. Blocks are enclosed in curly braces `{}` and have to return a value. Local variables inside a block using let or var are mutable.
+
+```{ojs}
+
+viewof maxVal = Inputs.range([0, 1000], {label: "Sum up to", step: 1})
+
+```
+
+```{ojs}
+total = {
+    let sum = 0;
+
+    for (let i = 1; i <= maxVal; i += 1){
+    sum += i;
+    }
+
+    return sum
+}
+
+total;
+```
+
+Functions are declared and called as in vanilla JavaScript.
+
+```{ojs}
+function sumNums(max) {
+  let sum = 0;
+
+  for (let i = 1; i <= max; i += 1) {
+    sum += i;
+  }
+
+  return sum;
+}
+total2 = sumNums(maxVal);
+total2
+```
+
+
+# Wrapping object literals
+
+We wrap single objects in parentheses to make them distinguishable from code blocks
+```{ojs}
+obj = ({a: 1, b: 2});
+obj
+```
+This isn't necessary inside code blocks or functions
+
+```{ojs}
+function objReturn() {
+    return {a: 1, b: 2}
+}
+
+objReturn()
+```
+
+
+# Promises and Implicit Await
+
+Many js functions work asynchronously (e.g. retrieving data over a network). They do this by immediately returning a *promise* which is then *resolved* once the data is available or an error is produced.
+
+```{ojs}
+lion = FileAttachment("pexels-charl-durand.jpeg").image({width: 500})
+```
+
+Observable awaits promises at the top level of a cell.
+
+
+
+
+# Getting Data Into Observable
+
+```{ojs}
+data = FileAttachment("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv").csv({ typed: true });
+viewof rows = Inputs.table(data)
+```
+
+
+Create a filter:
+```{ojs}
+viewof bill_length_min = Inputs.range(
+  [32, 50], 
+  {value: 35, step: 1, label: "Bill length (min):"}
+)
+viewof islands = Inputs.checkbox(
+  ["Torgersen", "Biscoe", "Dream"],
+  { value: ["Torgersen", "Biscoe"],
+    label: "Islands:"
+  }
+)
+```
+
+Write filtering function:
+```{ojs}
+filtered = data.filter(function(penguin) {
+  return bill_length_min < penguin.bill_length_mm &&
+         islands.includes(penguin.island);
+})
+```
+
+Plot filtered data:
+```{ojs}
+Plot.rectY(filtered, 
+  Plot.binX(
+    {y: "count"}, 
+    {x: "body_mass_g", fill: "species", thresholds: 20}
+  ))
+  .plot({
+    facet: {
+      data: filtered,
+      x: "sex",
+      y: "species",
+      marginRight: 80
+    },
+    marks: [
+      Plot.frame(),
+    ]
+  }
+)
+```
