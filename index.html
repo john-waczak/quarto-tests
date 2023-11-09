@@ -361,12 +361,96 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+<section id="map-test" class="level1">
+<h1>Map test</h1>
+<p><a href="https://observablehq.com/d/d540c039bae98334">see this example</a></p>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb13" data-startfrom="155" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 154;"><span id="cb13-155"><a href="#cb13-155" aria-hidden="true" tabindex="-1"></a>gnis_data <span class="op">=</span> {</span>
+<span id="cb13-156"><a href="#cb13-156" aria-hidden="true" tabindex="-1"></a>  <span class="co">//tba - graphql thing</span></span>
+<span id="cb13-157"><a href="#cb13-157" aria-hidden="true" tabindex="-1"></a><span class="co">//https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/1452448 -- https://github.com/internetofwater/docs.geoconnex.us/wiki/WaDE-Template</span></span>
+<span id="cb13-158"><a href="#cb13-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-159"><a href="#cb13-159" aria-hidden="true" tabindex="-1"></a>  <span class="co">//https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0</span></span>
+<span id="cb13-160"><a href="#cb13-160" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-13" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb14" data-startfrom="164" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 163;"><span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a>unified_school_district_data <span class="op">=</span> {</span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> json <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="vs">`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/14/query?where=GEOID="4900870"&amp;geometryType=esriGeometryPolygon&amp;inSR=4326&amp;outFields=*&amp;returnGeometry=true&amp;f=geojson`</span>)<span class="op">.</span><span class="fu">then</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="fu">json</span>())</span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> json</span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-14" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb15" data-startfrom="172" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 171;"><span id="cb15-172"><a href="#cb15-172" aria-hidden="true" tabindex="-1"></a>county_data <span class="op">=</span> {</span>
+<span id="cb15-173"><a href="#cb15-173" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> json <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="vs">`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/82/query?where=GEOID="31039"&amp;geometryType=esriGeometryPolygon&amp;inSR=4326&amp;outFields=*&amp;returnGeometry=true&amp;f=geojson`</span>)<span class="op">.</span><span class="fu">then</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="fu">json</span>())</span>
+<span id="cb15-174"><a href="#cb15-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-175"><a href="#cb15-175" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> json</span>
+<span id="cb15-176"><a href="#cb15-176" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-15" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb16" data-startfrom="180" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 179;"><span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a>incorporated_place_data <span class="op">=</span> {</span>
+<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> json <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="vs">`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/28/query?where=GEOID="0157576"&amp;geometryType=esriGeometryPolygon&amp;inSR=4326&amp;outFields=*&amp;returnGeometry=true&amp;f=geojson`</span>)<span class="op">.</span><span class="fu">then</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="fu">json</span>())</span>
+<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> json</span>
+<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-16" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb17" data-startfrom="188" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 187;"><span id="cb17-188"><a href="#cb17-188" aria-hidden="true" tabindex="-1"></a>census_designated_place_data <span class="op">=</span> {</span>
+<span id="cb17-189"><a href="#cb17-189" aria-hidden="true" tabindex="-1"></a>   <span class="kw">const</span> json <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="vs">`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/30/query?where=GEOID="0181084"&amp;geometryType=esriGeometryPolygon&amp;inSR=4326&amp;outFields=*&amp;returnGeometry=true&amp;f=geojson`</span>)<span class="op">.</span><span class="fu">then</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="fu">json</span>())</span>
+<span id="cb17-190"><a href="#cb17-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-191"><a href="#cb17-191" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> json</span>
+<span id="cb17-192"><a href="#cb17-192" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-17" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb18" data-startfrom="197" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 196;"><span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> container <span class="op">=</span> <span class="kw">yield</span> htl<span class="op">.</span><span class="fu">html</span><span class="vs">`&lt;div style="height: 500px;"&gt;`</span><span class="op">;</span></span>
+<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> map <span class="op">=</span> L<span class="op">.</span><span class="fu">map</span>(container)<span class="op">;</span></span>
+<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> countyLayer <span class="op">=</span> L<span class="op">.</span><span class="fu">geoJSON</span>(county_data)<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span>
+<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> incorporatedPlaceLayer <span class="op">=</span> L<span class="op">.</span><span class="fu">geoJSON</span>(incorporated_place_data)<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span>
+<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> designatedPlaceLayer <span class="op">=</span> L<span class="op">.</span><span class="fu">geoJSON</span>(census_designated_place_data)<span class="op">.</span><span class="fu">addTo</span>(map)</span>
+<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a>map<span class="op">.</span><span class="fu">fitBounds</span>(incorporatedPlaceLayer<span class="op">.</span><span class="fu">getBounds</span>()<span class="op">,</span> {<span class="dt">maxZoom</span><span class="op">:</span> <span class="dv">16</span>})<span class="op">;</span></span>
+<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a>L<span class="op">.</span><span class="fu">tileLayer</span>(<span class="st">"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"</span><span class="op">,</span> {</span>
+<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a>  <span class="dt">attribution</span><span class="op">:</span> <span class="st">"© &lt;a href=https://www.openstreetmap.org/copyright&gt;OpenStreetMap&lt;/a&gt; contributors"</span></span>
+<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a>})<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span>
+<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-18" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</section>
 
 </main>
 <!-- /main column -->
 
 <script type="ojs-module-contents">
-{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"x = Math.random();\nx;\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"test_string = \"Hello world!\";\ntest_string;\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"\nviewof maxVal = Inputs.range([0, 1000], {label: \"Sum up to\", step: 1})\n\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"total = {\n    let sum = 0;\n\n    for (let i = 1; i <= maxVal; i += 1){\n    sum += i;\n    }\n\n    return sum\n}\n\ntotal;\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"function sumNums(max) {\n  let sum = 0;\n\n  for (let i = 1; i <= max; i += 1) {\n    sum += i;\n  }\n\n  return sum;\n}\ntotal2 = sumNums(maxVal);\ntotal2\n"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"obj = ({a: 1, b: 2});\nobj\n"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"function objReturn() {\n    return {a: 1, b: 2}\n}\n\nobjReturn()\n"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"lion = FileAttachment(\"pexels-charl-durand.jpeg\").image({width: 500})\n"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"data = FileAttachment(\"https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv\").csv({ typed: true });\nviewof rows = Inputs.table(data)\n"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"viewof bill_length_min = Inputs.range(\n  [32, 50], \n  {value: 35, step: 1, label: \"Bill length (min):\"}\n)\nviewof islands = Inputs.checkbox(\n  [\"Torgersen\", \"Biscoe\", \"Dream\"],\n  { value: [\"Torgersen\", \"Biscoe\"],\n    label: \"Islands:\"\n  }\n)\n"},{"methodName":"interpret","cellName":"ojs-cell-11","inline":false,"source":"filtered = data.filter(function(penguin) {\n  return bill_length_min < penguin.bill_length_mm &&\n         islands.includes(penguin.island);\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-12","inline":false,"source":"Plot.rectY(filtered, \n  Plot.binX(\n    {y: \"count\"}, \n    {x: \"body_mass_g\", fill: \"species\", thresholds: 20}\n  ))\n  .plot({\n    facet: {\n      data: filtered,\n      x: \"sex\",\n      y: \"species\",\n      marginRight: 80\n    },\n    marks: [\n      Plot.frame(),\n    ]\n  }\n)\n"},{"methodName":"interpretQuiet","source":"shinyInput('maxVal')"},{"methodName":"interpretQuiet","source":"shinyInput('rows')"},{"methodName":"interpretQuiet","source":"shinyInput('bill_length_min')"},{"methodName":"interpretQuiet","source":"shinyInput('islands')"}]}
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"x = Math.random();\nx;\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"test_string = \"Hello world!\";\ntest_string;\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"\nviewof maxVal = Inputs.range([0, 1000], {label: \"Sum up to\", step: 1})\n\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"total = {\n    let sum = 0;\n\n    for (let i = 1; i <= maxVal; i += 1){\n    sum += i;\n    }\n\n    return sum\n}\n\ntotal;\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"function sumNums(max) {\n  let sum = 0;\n\n  for (let i = 1; i <= max; i += 1) {\n    sum += i;\n  }\n\n  return sum;\n}\ntotal2 = sumNums(maxVal);\ntotal2\n"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"obj = ({a: 1, b: 2});\nobj\n"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"function objReturn() {\n    return {a: 1, b: 2}\n}\n\nobjReturn()\n"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"lion = FileAttachment(\"pexels-charl-durand.jpeg\").image({width: 500})\n"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"data = FileAttachment(\"https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv\").csv({ typed: true });\nviewof rows = Inputs.table(data)\n"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"viewof bill_length_min = Inputs.range(\n  [32, 50], \n  {value: 35, step: 1, label: \"Bill length (min):\"}\n)\nviewof islands = Inputs.checkbox(\n  [\"Torgersen\", \"Biscoe\", \"Dream\"],\n  { value: [\"Torgersen\", \"Biscoe\"],\n    label: \"Islands:\"\n  }\n)\n"},{"methodName":"interpret","cellName":"ojs-cell-11","inline":false,"source":"filtered = data.filter(function(penguin) {\n  return bill_length_min < penguin.bill_length_mm &&\n         islands.includes(penguin.island);\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-12","inline":false,"source":"Plot.rectY(filtered, \n  Plot.binX(\n    {y: \"count\"}, \n    {x: \"body_mass_g\", fill: \"species\", thresholds: 20}\n  ))\n  .plot({\n    facet: {\n      data: filtered,\n      x: \"sex\",\n      y: \"species\",\n      marginRight: 80\n    },\n    marks: [\n      Plot.frame(),\n    ]\n  }\n)\n"},{"methodName":"interpret","cellName":"ojs-cell-13","inline":false,"source":"gnis_data = {\n  //tba - graphql thing\n//https://edits.nationalmap.gov/apps/gaz-domestic/public/summary/1452448 -- https://github.com/internetofwater/docs.geoconnex.us/wiki/WaDE-Template\n\n  //https://cartowfs.nationalmap.gov/arcgis/rest/services/geonames/MapServer/0\n} \n"},{"methodName":"interpret","cellName":"ojs-cell-14","inline":false,"source":"unified_school_district_data = {\n  const json = await fetch(`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/14/query?where=GEOID=\"4900870\"&geometryType=esriGeometryPolygon&inSR=4326&outFields=*&returnGeometry=true&f=geojson`).then(d => d.json())\n\n  return json\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-15","inline":false,"source":"county_data = {\n  const json = await fetch(`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/82/query?where=GEOID=\"31039\"&geometryType=esriGeometryPolygon&inSR=4326&outFields=*&returnGeometry=true&f=geojson`).then(d => d.json())\n\n  return json\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-16","inline":false,"source":"incorporated_place_data = {\n  const json = await fetch(`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/28/query?where=GEOID=\"0157576\"&geometryType=esriGeometryPolygon&inSR=4326&outFields=*&returnGeometry=true&f=geojson`).then(d => d.json())\n\n  return json\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-17","inline":false,"source":"census_designated_place_data = {\n   const json = await fetch(`https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/30/query?where=GEOID=\"0181084\"&geometryType=esriGeometryPolygon&inSR=4326&outFields=*&returnGeometry=true&f=geojson`).then(d => d.json())\n\n  return json\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-18","inline":false,"source":"{\nconst container = yield htl.html`<div style=\"height: 500px;\">`;\nconst map = L.map(container);\nconst countyLayer = L.geoJSON(county_data).addTo(map);\nconst incorporatedPlaceLayer = L.geoJSON(incorporated_place_data).addTo(map);\nconst designatedPlaceLayer = L.geoJSON(census_designated_place_data).addTo(map)\n  \nmap.fitBounds(incorporatedPlaceLayer.getBounds(), {maxZoom: 16});\nL.tileLayer(\"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png\", {\n  attribution: \"© <a href=https://www.openstreetmap.org/copyright>OpenStreetMap</a> contributors\"\n}).addTo(map);\n}\n"},{"methodName":"interpretQuiet","source":"shinyInput('maxVal')"},{"methodName":"interpretQuiet","source":"shinyInput('rows')"},{"methodName":"interpretQuiet","source":"shinyInput('bill_length_min')"},{"methodName":"interpretQuiet","source":"shinyInput('islands')"}]}
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
